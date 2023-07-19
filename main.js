@@ -1,3 +1,4 @@
+let sum = 0;
 function toAddExpense(name , amount){
     return `<tr>
     <td>${name}</td>
@@ -12,6 +13,7 @@ function addExpense(){
 
     if(expenseName.val().trim() === "" || expenseAmount.val().trim() === ""){
         $("#error-span").css("display" , "inline")
+        return;
     }else{
         $("#error-span").css("inline" , "display")
     }
@@ -20,9 +22,9 @@ function addExpense(){
 
     $("#title").after(todorow);
 
-    let sum = $("#expense-sum").val()
-    sum += expenseAmount.val();
-    sum.val(sum.val())
+    sum = Number($("#expense-sum").text());
+    sum += Number(expenseAmount.val());
+    $("#expense-sum").text(sum);
 
     expenseName.val("")
     expenseAmount.val("")
@@ -32,6 +34,7 @@ $(document).ready(function(){
     $(".add-btn").click(function(){
         addExpense();
     })
+    
 
     $("#delet-btn").click(function(){
         const todeleterow = $(toAddExpense(expenseName.val(), expenseAmount.val()))
